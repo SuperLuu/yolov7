@@ -60,10 +60,10 @@ from utils.segment.metrics import KEYS, fitness
 from utils.segment.plots import plot_images_and_masks, plot_results_with_masks
 from utils.torch_utils import (EarlyStopping, ModelEMA, de_parallel, select_device, smart_DDP, smart_optimizer,
                                smart_resume, torch_distributed_zero_first)
-
-LOCAL_RANK = int(os.getenv('LOCAL_RANK', -1))  # https://pytorch.org/docs/stable/elastic/run.html
-RANK = int(os.getenv('RANK', -1))#获取某一个环境变量，而不是所有
-WORLD_SIZE = int(os.getenv('WORLD_SIZE', 1))
+#getenv获取某一个环境变量，而不是所有.
+LOCAL_RANK = int(os.getenv('LOCAL_RANK', -1))  # https://pytorch.org/docs/stable/elastic/run.html 指在一个node上进程的相对序号，local_rank在node之间相互独立
+RANK = int(os.getenv('RANK', -1))#标识一个进程在本机上是第几个进程，进程号，在多进程上下文中，我们通常假定rank 0是第一个进程或者主进程，其它进程分别具有1，2，3不同rank号，这样总共具有4个进程
+WORLD_SIZE = int(os.getenv('WORLD_SIZE', 1)) #全局进程总个数，即在一个分布式任务中rank的数量
 
 
 def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictionary
