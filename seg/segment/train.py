@@ -62,7 +62,7 @@ from utils.torch_utils import (EarlyStopping, ModelEMA, de_parallel, select_devi
                                smart_resume, torch_distributed_zero_first)
 
 LOCAL_RANK = int(os.getenv('LOCAL_RANK', -1))  # https://pytorch.org/docs/stable/elastic/run.html
-RANK = int(os.getenv('RANK', -1))
+RANK = int(os.getenv('RANK', -1))#获取某一个环境变量，而不是所有
 WORLD_SIZE = int(os.getenv('WORLD_SIZE', 1))
 
 
